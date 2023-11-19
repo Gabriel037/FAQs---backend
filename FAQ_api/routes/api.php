@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// CRUD faqs
+Route::post('/create_faq', [FaqsController::class, 'store']);
+Route::get('/faqs', [FaqsController::class, 'index']);
+Route::get('/faq_by_id/{id}', [FaqsController::class, 'show']);
+Route::put('/updated_faq/{id}', [FaqsController::class, 'updated']);
+Route::delete('/delete_faq/{id}', [FaqsController::class, 'destroy']);
