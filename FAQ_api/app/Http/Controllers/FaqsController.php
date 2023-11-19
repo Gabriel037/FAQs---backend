@@ -17,14 +17,14 @@ class FaqsController extends Controller
         try {
 
             $faqs = DB::table('faqs')
-            ->select('id', 'question', 'response')
+            ->select('id', 'type','question', 'response')
             ->orderBy('id', 'asc')
             ->get();
 
             return response()->json([
                 'status' => 'Sucesso',
                 'message' => 'Faqs obtidas com sucesso!',
-                'dados' => $faqs
+                'data' => $faqs
             ]);
 
         } catch(Exception $error) {
@@ -66,6 +66,7 @@ class FaqsController extends Controller
         try {
             $faq = new Faq();
             
+            $faq->type = $request->type;
             $faq->question = $request->question;
             $faq->response = $request->response;
 
@@ -114,6 +115,7 @@ class FaqsController extends Controller
         try {
             $faq = Faq::find($id);
             if($faq) {
+                if($request->type) $faq->response = $request->type;
                 if($request->question) $faq->question = $request->question;
                 if($request->response) $faq->response = $request->response;
             } else {

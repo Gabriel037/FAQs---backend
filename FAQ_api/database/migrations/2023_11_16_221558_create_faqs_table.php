@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
+            $table->integer('type');
             $table->longText('question');
             $table->longText('response');
             $table->timestamps();
